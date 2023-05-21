@@ -8,8 +8,12 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import ActivationPage from "./ActivationPage";
+import axios from "axios";
 
 const App = () => {
+axios.defaults.baseURL = "https://music-backend-m1c2.onrender.com";
+axios.defaults.headers.post["Content_Type"]  = "application/json";
+
   return (
     <BrowserRouter>
       <AuthProvider>
