@@ -17,7 +17,6 @@ export const welcome = (req, res) => {
 export const preRegister = async (req, res) => {
   try {
     const { email, password, genre } = req.body;
-    console.log(genre);
 
     if (!validator.validate(email)) {
       return res.json({ error: "A valid email is required" });
@@ -41,13 +40,14 @@ export const preRegister = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const activationUrl = `http://localhost:3000/activation/${token}`;
+    const activationUrl = `https://magnificent-alpaca-311c3c.netlify.app/activation/${token}`;
 
     await sendEmail({
       email: email,
       subject: "Activate your account",
       message: `Hello ${email}, please click the link to activate your account: ${activationUrl}`,
     });
+    return res.json({ success: "Please check your email to activate your account." });
   } catch (err) {
     console.log(err);
     return res.json({ error: "Something went Wrong. Try again." });
