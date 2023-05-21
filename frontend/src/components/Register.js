@@ -145,7 +145,7 @@ const Register = () => {
                 cursor: "pointer",
               }}
             >
-              Register
+              {loading ? 'Loading...' : 'Register' }
             </button>
             <div style={{ marginTop: "10px", textAlign: "center" }}>
               <p>
