@@ -8,7 +8,6 @@ const Register = () => {
   const [auth, setAuth] = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [genre, setGenre] = useState("");
 
   const navigate = useNavigate();
@@ -28,7 +27,6 @@ const Register = () => {
       const { data } = await axios.post("/pre-register", {
         email,
         password,
-        confirmPassword,
         genre,
       });
 
@@ -98,25 +96,6 @@ const Register = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{
-                  width: "90%",
-                  padding: "10px",
-                  borderRadius: "4px",
-                  border: "1px solid #ccc",
-                }}
-              />
-            </div>
-            <div style={{ marginBottom: "15px" }}>
-              <label htmlFor="confirmPassword" style={{ marginBottom: "5px" }}>
-                Confirm Password*
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Enter your confirm password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
                 style={{
                   width: "90%",
                   padding: "10px",
