@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { CircularProgress } from '@mui/material';
+
 
 import { useAuth } from "../context/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +11,8 @@ const Login = () => {
   const [auth, setAuth] = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,6 +26,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
+
     try {
       const { data } = await axios.post("/login", {
         email,
@@ -39,6 +45,9 @@ const Login = () => {
     } catch (err) {
       console.error(err);
       toast.error("Login failed. Try again");
+    }
+    finally {
+      setLoading(false); 
     }
   };
 
@@ -63,6 +72,7 @@ const Login = () => {
           }}
         >
           <h2 style={{ marginBottom: "20px" }}>Login</h2>
+          {loading && <Loader />}
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: "15px" }}>
               <label htmlFor="email" style={{ marginBottom: "5px" }}>
