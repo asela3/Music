@@ -47,6 +47,7 @@ export const preRegister = async (req, res) => {
       subject: "Activate your account",
       message: `Hello ${email}, please click the link to activate your account: ${activationUrl}`,
     });
+    return res.json({ success: "Please check your email to activate your account." });
   } catch (err) {
     console.log(err);
     return res.json({ error: "Something went Wrong. Try again." });

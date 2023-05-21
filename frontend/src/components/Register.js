@@ -37,9 +37,7 @@ const Register = () => {
         toast.error(data.error);
         setLoading(false);
       } else {
-        localStorage.setItem("auth", JSON.stringify(data));
-        setAuth({ ...auth, token: data.token, user: data.user });
-        toast.success("Registration successful");
+        toast.success("Registration successful. Please check your email to activate your account");
         navigate("/login");
         setLoading(false);
       }
