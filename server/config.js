@@ -18,4 +18,4 @@ export const AWS_SES = new SES({
 
 export const JWT_SECRET = "HFSDJGDFJGJjjh8785687568HJHJ89809";
 
-export const CLIENT_URL = "http://localhost:3000";
+export const CLIENT_URL = "https://magnificent-alpaca-311c3c.netlify.app";
