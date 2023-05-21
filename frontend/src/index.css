@@ -44,7 +44,7 @@ code {
 }
 @media (max-width: 720px) {
   #root {
-      display: none;
+      display: block;
   }
   #resolution-warning {
       display: block;
