@@ -9,6 +9,7 @@ const Login = () => {
   const [auth, setAuth] = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading,setLoading] = useState(false)
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,6 +23,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post("/login", {
         email,
@@ -30,15 +32,21 @@ const Login = () => {
 
       if (data?.error) {
         toast.error(data.error);
+        setLoading(false);
+
       } else {
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
         toast.success("Login successful");
         navigate("/home");
+        setLoading(false);
+
       }
     } catch (err) {
       console.error(err);
       toast.error("Login failed. Try again");
+      setLoading(false);
+
     }
   };
 
@@ -118,7 +126,7 @@ const Login = () => {
                 cursor: "pointer",
               }}
             >
-              Login
+              {loading ? "Loading..." : "Login"}
             </button>
             <div style={{ marginTop: "10px", textAlign: "center" }}>
               <p>

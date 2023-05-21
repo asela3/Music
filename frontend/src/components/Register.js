@@ -9,6 +9,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [genre, setGenre] = useState("");
+  const [loading,setLoading] = useState(false);
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,6 +25,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post("/pre-register", {
         email,
@@ -32,15 +35,18 @@ const Register = () => {
 
       if (data?.error) {
         toast.error(data.error);
+        setLoading(false);
       } else {
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
         toast.success("Registration successful");
         navigate("/login");
+        setLoading(false);
       }
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Try again");
+      setLoading(false);
     }
   };
 
@@ -118,6 +124,7 @@ const Register = () => {
                   borderRadius: "4px",
                   border: "1px solid #ccc",
                 }}
+                required
               >
                 <option value="">Select genre</option>
                 <option value="rock">Rock</option>
