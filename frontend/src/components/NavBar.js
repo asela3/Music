@@ -20,7 +20,7 @@ const NavBar = () => {
       <button
             onClick={handleLogout}
             style={{
-              width: "100%",
+              width: "100px",
               padding: "10px",
               borderRadius: "4px",
               backgroundColor: "#dc3545",
