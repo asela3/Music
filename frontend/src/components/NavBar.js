@@ -28,6 +28,7 @@ const NavBar = () => {
               border: "none",
               cursor: "pointer",
               marginTop: "10px",
+              marginRight: "20px"
             }}
           >
             Logout
