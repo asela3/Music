@@ -6,7 +6,7 @@ import SongListHeader from "./SongListHeader";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
-import { s3 } from "../../Aws"
+import { s3 } from "../Aws";
 
 const Home = () => {
   const navigate = useNavigate();
