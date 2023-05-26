@@ -128,7 +128,11 @@ const Register = () => {
                 <option value="rock">Rock</option>
                 <option value="pop">Pop</option>
                 <option value="hip-hop">Hip Hop</option>
-                <option value="electronic">Electronic</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Classic Rock">Classic Rock</option>
+                <option value="Electropop">Electropop</option>
+                <option value="Indie">Indie</option>
               </select>
             </div>
             <button
