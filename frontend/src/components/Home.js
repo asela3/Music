@@ -6,6 +6,7 @@ import SongListHeader from "./SongListHeader";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
+import { s3 } from "../../Aws"
 
 const Home = () => {
   const navigate = useNavigate();
@@ -22,11 +23,26 @@ const Home = () => {
     }
   }, [fromLS]);
 
-  useEffect(()=> {
-const data = fetch('https://ashi-music-songs.s3.amazonaws.com/songs.json')
-.then(res => res.json())
-.then(data => setSongs(data));
-  },[])
+  useEffect(() => {
+    const fetchJsonFile = async () => {
+      try {
+        const params = {
+          Bucket: "ashimusic",
+          Key: "songs.json",
+        };
+
+        const response = await s3.getObject(params).promise();
+        const fileContent = response.Body.toString();
+        const jsonContent = JSON.parse(fileContent);
+
+        setSongs(jsonContent);
+      } catch (error) {
+        console.error("Error fetching JSON file:", error);
+      }
+    };
+
+    fetchJsonFile();
+  }, []);
 
   const genre = auth?.user?.genre;
   const mySongs = songs.filter((i) => i.genre === genre);
