@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Player from "./Player";
 import SongList from "./SongList";
-import songs from "../data/songs.json";
 import SongDetail from "./SongDetail";
 import SongListHeader from "./SongListHeader";
 import NavBar from "./NavBar";
@@ -12,6 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
   let fromLS = localStorage.getItem("auth");
   const [auth, setAuth] = useAuth();
+  const [songs, setSongs] = useState([])
 
   useEffect(() => {
     if (!fromLS) {
@@ -22,10 +22,12 @@ const Home = () => {
     }
   }, [fromLS]);
 
-  // for (let index = 0; index < songs.length; index++) {
-  //   const song = songs[index];
-  //   song.id = index;
-  // }
+  useEffect(()=> {
+const data = fetch('https://ashi-music-songs.s3.amazonaws.com/songs.json')
+.then(res => res.json())
+.then(data => setSongs(data));
+  },[])
+
   const genre = auth?.user?.genre;
   const mySongs = songs.filter((i) => i.genre === genre);
 
