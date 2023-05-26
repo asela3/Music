@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import "./css/NavBar.css";
 import axios from "axios";
 import { useAuth } from "../context/auth";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [auth, setAuth] = useAuth();
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
